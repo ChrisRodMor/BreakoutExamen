@@ -4,6 +4,9 @@ let paddle;
 let ball;
 let canvas;
 let estado = "menu";
+let vidas = 3;
+let transicionEnCurso = false;
+
 
 
 function preload() {
@@ -39,6 +42,13 @@ function draw() {
 
       ball.update();
       ball.draw();
+      fill(255);
+      textSize(16);
+      textAlign(LEFT, TOP);
+      text("Vidas: " + vidas, 10, 10);
+      //text("Puntos: " + puntos, 10, 30);
+      //text("Nivel: " + nivel, 10, 50);
+
       break;
 
     case "nivelCompletado":
@@ -47,7 +57,18 @@ function draw() {
 
     case "gameOver":
       mostrarTransicion("Game Over");
+    
+      if (!transicionEnCurso) {
+        transicionEnCurso = true;
+    
+        setTimeout(() => {
+          reiniciarJuego();
+          transicionEnCurso = false; 
+        }, 2000);
+      }
+    
       break;
+      
 
     case "ganar":
       mostrarTransicion("¡Has ganado!");
@@ -55,16 +76,26 @@ function draw() {
   }
 }
 
-function keyPressed() {
-  paddle.handleKey(keyCode, true);
-}
 
-function keyReleased() {
-  paddle.handleKey(keyCode, false);
-}
 
 function iniciarJuego() {
   estado = "jugando";
   paddle = new Paddle();
   ball = new Ball();
 }
+
+function mostrarTransicion(mensaje) {
+  fill(255);
+  textAlign(CENTER, CENTER);
+  textSize(32);
+  text(mensaje, width / 2, height / 2);
+}
+ function reiniciarJuego() {
+   estado = "menu";
+   vidas = 3;
+   //puntos = 0;
+   //nivel = 1;
+   ball.reset();
+   paddle.x = width / 2 - paddle.w / 2;
+   pantallaInicio.mostrar();
+ }

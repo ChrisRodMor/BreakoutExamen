@@ -9,16 +9,18 @@ class PantallaInicio {
       this.boton.style('background-color', '#FAE25A');
       this.boton.style('border', 'none');          
       this.boton.style('border-radius', '20px');
+      this.boton.hide();
+
       this.boton.mousePressed(() => {
         this.ocultar();
         juegoIniciarCallback();
       });
     }
   
-    mostrar() {
-        if (this.visible) {
-            image(fondoInicio, 0, 0, width, height);
-        }
+     mostrar() {
+      this.visible = true;
+      image(fondoInicio, 0, 0, width, height);
+      this.boton.show();
     }
       
     ocultar() {
@@ -26,9 +28,6 @@ class PantallaInicio {
       this.boton.hide();
     }
   
-    mostrarBoton() {
-      this.visible = true;
-      this.boton.show();
-    }
+    
 }
   
