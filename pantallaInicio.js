@@ -2,9 +2,13 @@ class PantallaInicio {
     constructor(juegoIniciarCallback) {
       this.visible = true;
       this.boton = createButton("PLAY");
-      this.boton.position(windowWidth / 2 - 150, windowHeight - 150);
-      this.boton.size(150, 80);
-      this.boton.style('font-size', '18px');
+      this.boton.position(800 / 2, 350+100);
+      this.boton.size(100, 30);
+      this.boton.style('font-size', '20px');
+      this.boton.style('font-weight', 'bold');
+      this.boton.style('background-color', '#FAE25A');
+      this.boton.style('border', 'none');          
+      this.boton.style('border-radius', '20px');
       this.boton.mousePressed(() => {
         this.ocultar();
         juegoIniciarCallback();

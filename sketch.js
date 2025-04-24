@@ -2,46 +2,69 @@ let pantallaInicio;
 let fondoInicio;
 let paddle;
 let ball;
+let canvas;
+let estado = "menu";
+
 
 function preload() {
   fondoInicio = loadImage('breakoutAtariLOGO.jpg');
 }
 
-
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  background("black");
+  canvas = createCanvas(900, 650);
+  canvas.parent('canvas-container');
+  canvas.position((windowWidth - width) / 2, (windowHeight - height) / 2);
+
   pantallaInicio = new PantallaInicio(iniciarJuego);
-  paddle = new Paddle();
-  ball = new Ball();
+  pantallaInicio.boton.position((windowWidth - width) / 2 + width / 2 - 50, (windowHeight - height) / 2 + height / 2 + 200);
 }
 
 function draw() {
-  background(0);
+  background("black");
 
   if (pantallaInicio.visible) {
     pantallaInicio.mostrar();
-    return; // no dibujar nada más si está en la pantalla de inicio
-  }
-  else{
-    paddle.update();
-    paddle.draw();
-
-    ball.update();
-    ball.draw();
+    return;
   }
 
-  // Lógica y dibujo del juego aquí
+  switch (estado) {
+    case "menu":
+      pantallaInicio.mostrar();
+      break;
+
+    case "jugando":
+      paddle.update();
+      paddle.draw();
+
+      ball.update();
+      ball.draw();
+      break;
+
+    case "nivelCompletado":
+      mostrarTransicion("Nivel Completado");
+      break;
+
+    case "gameOver":
+      mostrarTransicion("Game Over");
+      break;
+
+    case "ganar":
+      mostrarTransicion("¡Has ganado!");
+      break;
+  }
 }
 
 function keyPressed() {
-    paddle.handleKey(keyCode, true);
+  paddle.handleKey(keyCode, true);
 }
-  
+
 function keyReleased() {
-    paddle.handleKey(keyCode, false);
+  paddle.handleKey(keyCode, false);
 }
 
 function iniciarJuego() {
-  console.log("Juego iniciado");
-  // Aquí puedes poner lógica para comenzar el nivel 1, inicializar pelota, etc.
+  estado = "jugando";
+  paddle = new Paddle();
+  ball = new Ball();
 }
