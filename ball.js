@@ -3,6 +3,8 @@ class Ball {
     this.r = 12;
     this.attached = true; // nueva bandera
     this.puedeLiberarse = true;
+    this.vx = 0;
+    this.vy = 0;
     this.reset();
   }
 
@@ -42,9 +44,9 @@ class Ball {
       vidas--;
 
       if (vidas > 0) {
-        this.reset(); // todavía hay vidas → reintenta
+        this.reset(); // todavía hay vidas, entonces puede reintentar
       } else {
-        estado = "gameOver"; // sin vidas → game over
+        estado = "gameOver"; // sin vidas, es game over
       }
     }
   }
@@ -52,6 +54,11 @@ class Ball {
   release() {
     if (this.attached && this.puedeLiberarse) {
       this.attached = false;
+
+      if (this.vx === 0 && this.vy === 0) {
+        this.vx = random([-3, 3]);
+        this.vy = -4;
+      }
     }
   }
 
