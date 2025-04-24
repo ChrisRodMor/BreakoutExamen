@@ -6,6 +6,8 @@ let canvas;
 let estado = "menu";
 let vidas = 3;
 let transicionEnCurso = false;
+let bloques = [];
+let puntos = 0;
 
 
 
@@ -37,6 +39,14 @@ function draw() {
       break;
 
     case "jugando":
+
+      for (let bloque of bloques) {
+        bloque.draw();
+        if (bloque.checkCollision(ball)) {
+          puntos+=1;
+        }
+      }
+    
       paddle.update();
       paddle.draw();
 
@@ -44,10 +54,14 @@ function draw() {
       ball.draw();
       fill(255);
       textSize(16);
+      
       textAlign(LEFT, TOP);
       text("Vidas: " + vidas, 10, 10);
-      //text("Puntos: " + puntos, 10, 30);
-      //text("Nivel: " + nivel, 10, 50);
+      
+      textAlign(RIGHT, TOP);
+      text("Puntos: " + puntos, width - 10, 10);
+      
+
 
       break;
 
@@ -93,7 +107,7 @@ function mostrarTransicion(mensaje) {
  function reiniciarJuego() {
    estado = "menu";
    vidas = 3;
-   //puntos = 0;
+   puntos = 0;
    //nivel = 1;
    ball.reset();
    paddle.x = width / 2 - paddle.w / 2;
