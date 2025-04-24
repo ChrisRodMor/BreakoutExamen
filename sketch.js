@@ -12,7 +12,7 @@ let nivel = 1;
 
 
 function preload() {
-  fondoInicio = loadImage('breakoutAtariLOGO.jpg');
+  fondoInicio = loadImage('BreakoutAtariLOGO.jpg');
 }
 
 function setup() {
