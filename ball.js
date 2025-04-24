@@ -61,4 +61,21 @@ class Ball {
     fill(255);
     ellipse(this.x, this.y, this.r * 2);
   }
+
+  setSpeed(vel) {
+    if (this.vx > 0) {
+      this.vx = vel;
+    } else {
+      this.vx = -vel;
+    }
+  
+    if (this.vy > 0) {
+      this.vy = vel;
+    } else {
+      this.vy = -vel;
+    }
+  }
+  
+  
+
 }
