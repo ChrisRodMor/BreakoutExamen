@@ -1,7 +1,7 @@
 class Ball {
   constructor() {
     this.r = 12;
-    this.attached = true; // ← nueva bandera
+    this.attached = true; // nueva bandera
     this.puedeLiberarse = true;
     this.reset();
   }
@@ -9,8 +9,6 @@ class Ball {
   reset() {
     this.attached = true;
     this.puedeLiberarse = false; // una variable para controlar si se puede soltar la pelota 
-    this.vx = random([-3, 3]);
-    this.vy = -4;
 
     // esperar medio segundo antes de soltarla 
     setTimeout(() => {

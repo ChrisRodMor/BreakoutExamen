@@ -28,6 +28,11 @@ function setup() {
 function draw() {
   background("black");
 
+  if ((key === 'w' || key === 'W') && keyIsPressed && estado === "jugando") {
+    estado = "ganar";
+    key = '';
+  }
+
   if (pantallaInicio.visible) {
     pantallaInicio.mostrar();
     return;
